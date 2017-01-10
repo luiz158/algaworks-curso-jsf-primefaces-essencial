@@ -1,0 +1,7 @@
+target/
+.idea/
+.metadata/
+.settings/
+curso-jsf-e-primefaces-essencial.iml
+.classpath
+.project

@@ -14,10 +14,16 @@
 	<f:metadata>
 		<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
 	</f:metadata>
-	
-	<h:form id="frm">
+
+	<p:ajaxStatus>
+		<f:facet name="start">
+			<h:graphicImage library="algaworks" name="carregando.gif" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<h:form id="frm">		
 		<p:messages id="messages" />
-	
+		
 		<p:toolbar id="toolbar">
 			<f:facet name="left">
 				<p:inputText id="termoPesquisa" placeholder="Digite aqui um termo para pesquisa..." 

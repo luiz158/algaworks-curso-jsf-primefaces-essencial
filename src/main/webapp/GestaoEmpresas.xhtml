@@ -15,11 +15,17 @@
 		<f:viewAction action="#{gestaoEmpresasBean.todasEmpresas}" />
 	</f:metadata>
 
+	<!-- 
 	<p:ajaxStatus>
 		<f:facet name="start">
 			<h:graphicImage library="algaworks" name="carregando.gif" />
 		</f:facet>
 	</p:ajaxStatus>
+	-->
+	
+	<!-- 
+	<h:outputLink value="#{facesContext.externalContext.request.contextPath}/path-qualquer" >Oi</h:outputLink>
+	-->
 
 	<h:form id="frm">		
 		<p:messages id="messages" />
@@ -89,6 +95,12 @@
 			var="empresa" emptyMessage="Nenhuma informação a ser exibida"
 			paginator="true" rows="10" paginatorPosition="bottom"
 			selectionMode="single" selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
+			
+			<!-- 
+			<f:facet name="header">
+		        Empresas
+		    </f:facet>
+			-->
 			
 			<p:ajax event="rowSelect" update="frm:toolbar"/>
 			

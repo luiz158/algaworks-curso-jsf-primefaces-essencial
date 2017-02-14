@@ -21,8 +21,7 @@ public class CamadaPersistenciaWeld {
         
         WeldContainer weld = new Weld().initialize();
         CamadaPersistenciaWeld cp = weld.instance().select(CamadaPersistenciaWeld.class).get();
-        cp.teste();
-        
+        cp.teste();        
     }
 
     @Inject

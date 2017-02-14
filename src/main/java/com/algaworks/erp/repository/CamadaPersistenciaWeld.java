@@ -3,26 +3,38 @@ package com.algaworks.erp.repository;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.inject.Inject;
+
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
 
 import com.algaworks.erp.model.Empresa;
 import com.algaworks.erp.model.RamoAtividade;
 import com.algaworks.erp.model.TipoEmpresa;
+import com.algaworks.erp.service.CadastroEmpresaService;
 
-public class CamadaPersistencia {
+public class CamadaPersistenciaWeld {
     
-    public static void main(String[] args) {       
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AlgaWorksPU");
-        EntityManager em = emf.createEntityManager();
+    public static void main(String[] args) {
+        // Para usar assim é preciso comentar @RequestScoped do 
+        // produtor de EntityManager em EntityManagerProducer.
         
-        em.getTransaction().begin();
+        WeldContainer weld = new Weld().initialize();
+        CamadaPersistenciaWeld cp = weld.instance().select(CamadaPersistenciaWeld.class).get();
+        cp.teste();
         
-        //Declarando os repositórios
-        RamoAtividades ramoAtividades = new RamoAtividades(em);
-        Empresas empresas = new Empresas(em);
-        
+    }
+
+    @Inject
+    private RamoAtividades ramoAtividades;
+    
+    @Inject
+    private Empresas empresas;
+    
+    @Inject
+    private CadastroEmpresaService cadastroEmpresaService;
+    
+    public void teste() {       
         //Buscando as informações do banco
         List<RamoAtividade> listaDeRamoAtividades = ramoAtividades.pesquisar("");
         List<Empresa> listaDeEmpresas = empresas.pesquisar("");
@@ -38,16 +50,10 @@ public class CamadaPersistencia {
         empresa.setRamoAtividade(listaDeRamoAtividades.get(0));
         
         //Salvando a empresa
-        empresas.guardar(empresa);
-        
-        em.getTransaction().commit();
+        cadastroEmpresaService.salvar(empresa);
         
         //Verificando se a inserção funcionou
         List<Empresa> listaDeEmpresas2 = empresas.pesquisar("");
         System.out.println(listaDeEmpresas2);
-        
-        
-        em.close();
-        emf.close();
     }
 }

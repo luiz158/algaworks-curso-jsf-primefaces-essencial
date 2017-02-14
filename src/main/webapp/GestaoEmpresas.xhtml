@@ -22,11 +22,14 @@
 			<h:graphicImage library="algaworks" name="carregando.gif" />
 		</f:facet>
 	</p:ajaxStatus>
+	
+	<h:outputLink value="#{facesContext.externalContext.request.contextPath}/path-qualquer">
+		Lincando para dentro do projeto
+	</h:outputLink>
+	
+	<h:link value="Nova aba" outcome="GestaoEmpresas" target="_blank"/>
 	-->
 	
-	<!-- 
-	<h:outputLink value="#{facesContext.externalContext.request.contextPath}/path-qualquer" >Oi</h:outputLink>
-	-->
 
 	<h:form id="frm">		
 		<p:messages id="messages" />

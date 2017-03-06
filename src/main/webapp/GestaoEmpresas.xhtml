@@ -98,7 +98,8 @@
 		<p:dataTable id="empresasDataTable" value="#{gestaoEmpresasBean.listaEmpresas}"
 			var="empresa" emptyMessage="Nenhuma informação a ser exibida"
 			paginator="true" rows="10" paginatorPosition="bottom"
-			selectionMode="single" selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
+			selectionMode="single" selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}"
+			sortMode="multiple" sortOrder="ascending">
 			
 			<!-- 
 			<f:facet name="header">
@@ -127,7 +128,7 @@
 				<h:outputText value="#{empresa.nomeFantasia}" />
 			</p:column>
 			
-			<p:column headerText="Tipo empresa">
+			<p:column headerText="Tipo empresa" sortBy="#{empresa.tipo}">
 				<h:outputText value="#{empresa.tipo}" />
 			</p:column>
 			

@@ -24,9 +24,17 @@ public class RamoAtividadeConverter implements Converter {
         
         Long id = Long.valueOf(value);
         
+//        Long id = null;
+//        try { 
+//        	id = Long.valueOf(value);
+//        } catch (NumberFormatException e) { 
+//        	return null;
+//        }
+        
         for (RamoAtividade ramoAtividade: listaRamoAtividades) {
             if (id.equals(ramoAtividade.getId())) {
-                return ramoAtividade;
+            	return ramoAtividade;
+                
             }
         }
         

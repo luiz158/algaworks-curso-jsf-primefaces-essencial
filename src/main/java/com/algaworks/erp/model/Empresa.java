@@ -1,7 +1,7 @@
 package com.algaworks.erp.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +49,7 @@ public class Empresa implements Serializable {
     @Past
     @Temporal(TemporalType.DATE)
     @Column(name = "data_fundacao")
-    private Date dataFundacao;
+    private Calendar dataFundacao;
     
     @NotNull
     @ManyToOne
@@ -93,11 +93,11 @@ public class Empresa implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public Date getDataFundacao() {
+    public Calendar getDataFundacao() {
         return dataFundacao;
     }
 
-    public void setDataFundacao(Date dataFundacao) {
+    public void setDataFundacao(Calendar dataFundacao) {
         this.dataFundacao = dataFundacao;
     }
 

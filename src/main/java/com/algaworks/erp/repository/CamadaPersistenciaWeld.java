@@ -15,13 +15,18 @@ import com.algaworks.erp.service.CadastroEmpresaService;
 
 public class CamadaPersistenciaWeld {
     
-    public static void main(String[] args) {
-        // Para usar assim é preciso comentar @RequestScoped do 
-        // produtor de EntityManager em EntityManagerProducer.
+    public static void main(String[] args) throws Exception {
+        // Para usar assim é preciso alterar o escopo do 
+        // produtor de EntityManager de @RequestScoped
+    	// para @ApplicationScoped dentro de EntityManagerProducer.
         
         WeldContainer weld = new Weld().initialize();
+        
         CamadaPersistenciaWeld cp = weld.instance().select(CamadaPersistenciaWeld.class).get();
-        cp.teste();        
+        cp.teste();  
+        
+        weld.close();
+        System.out.println("Fim!");
     }
 
     @Inject
@@ -33,7 +38,7 @@ public class CamadaPersistenciaWeld {
     @Inject
     private CadastroEmpresaService cadastroEmpresaService;
     
-    public void teste() {       
+    public void teste() throws Exception {       
         //Buscando as informações do banco
         List<RamoAtividade> listaDeRamoAtividades = ramoAtividades.pesquisar("");
         List<Empresa> listaDeEmpresas = empresas.pesquisar("");
@@ -45,7 +50,7 @@ public class CamadaPersistenciaWeld {
         empresa.setCnpj("41.952.519/0001-57");
         empresa.setRazaoSocial("João da Silva 41952519000157");
         empresa.setTipo(TipoEmpresa.MEI);
-        empresa.setDataFundacao(new Date());
+        //empresa.setDataFundacao(new Date());
         empresa.setRamoAtividade(listaDeRamoAtividades.get(0));
         
         //Salvando a empresa

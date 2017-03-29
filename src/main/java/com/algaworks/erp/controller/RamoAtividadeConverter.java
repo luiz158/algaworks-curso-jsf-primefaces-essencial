@@ -8,12 +8,19 @@ import javax.faces.convert.Converter;
 
 import com.algaworks.erp.model.RamoAtividade;
 
+//@FacesConverter(forClass = RamoAtividade.class)
 public class RamoAtividadeConverter implements Converter {
     
     private List<RamoAtividade> listaRamoAtividades;
+    
+//    @Inject
+//    private RamoAtividades ramoAtividades;
 
+//    public RamoAtividadeConverter() {
+//    }
+    
     public RamoAtividadeConverter(List<RamoAtividade> listaRamoAtividades) {
-        this.listaRamoAtividades = listaRamoAtividades;
+    	this.listaRamoAtividades = listaRamoAtividades;
     }
 
     @Override
@@ -24,21 +31,7 @@ public class RamoAtividadeConverter implements Converter {
         
         Long id = Long.valueOf(value);
         
-//        Long id = null;
-//        try { 
-//        	id = Long.valueOf(value);
-//        } catch (NumberFormatException e) { 
-//        	return null;
-//        }
-        
-        for (RamoAtividade ramoAtividade: listaRamoAtividades) {
-            if (id.equals(ramoAtividade.getId())) {
-            	return ramoAtividade;
-                
-            }
-        }
-        
-        return null;
+        return buscar(id);
     }
 
     @Override
@@ -50,5 +43,16 @@ public class RamoAtividadeConverter implements Converter {
         RamoAtividade ramoAtividade = (RamoAtividade) value;
         
         return ramoAtividade.getId().toString();
+    }
+    
+    private RamoAtividade buscar(Long id) {
+    	for (RamoAtividade ramoAtividade: listaRamoAtividades) {
+            if (id.equals(ramoAtividade.getId())) {
+            	return ramoAtividade;
+                
+            }
+        }
+    	
+    	return null;//ramoAtividades.porId(id);
     }
 }

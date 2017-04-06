@@ -18,7 +18,7 @@ public class EntityManagerProducer {
     }
 
     @Produces
-    @RequestScoped
+    @RequestScoped //@ApplicationScoped
     public EntityManager createEntityManager() {
         return this.factory.createEntityManager();
     }
